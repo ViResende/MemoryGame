@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6edff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .controls {
+    background-color: #fff;
+    padding: 1rem;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .controls label,
+  .controls select,
+  .controls input,
+  .controls button {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #af4c4c;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+    max-width: 320px; /* <<< THIS IS THE SECRET */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+  
+  
+  .card {
+    width: 70px;
+    height: 70px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    margin: 0;
+  }
+  
+  
+  
+  .card.flipped {
+    background-color: white;
+    color: black;
+  }
+  
+  

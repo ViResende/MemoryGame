@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="controls">
+    <label for="difficulty">Choose difficulty:</label>
+    <select id="difficulty">
+      <option value="easy">Easy (2x2)</option>
+      <option value="medium" selected>Medium (4x4)</option>
+      <option value="hard">Hard (6x6)</option>
+    </select>
+
+    <label for="backColor">Pick Card Color:</label>
+    <input type="color" id="backColor" value="#333333">
+
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <h1>Memory Game</h1>
+  <p id="moves">Moves: 0</p>
+  <p id="timer">Time: 0 sec</p>
+  <div class="grid" id="gameBoard"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
