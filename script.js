@@ -24,7 +24,6 @@ function startGame() {
   document.getElementById('moves').textContent = `Moves: ${moves}`;
   document.getElementById('timer').textContent = `Time: ${time} sec`;
 
-  // CHANGE → always take current dropdown + color picker, then save it
   let difficulty = document.getElementById('difficulty').value;
   sessionStorage.setItem('difficulty', difficulty);
   document.getElementById('difficulty').value = difficulty;
@@ -33,27 +32,27 @@ function startGame() {
   sessionStorage.setItem('backColor', backColor);
   document.getElementById('backColor').value = backColor;
 
-  let cardValues = [];
+  let cardValues;
 
-  if (difficulty === 'easy') {
-    cardValues = ['A', 'A', 'B', 'B'];
-    gameBoard.style.gridTemplateColumns = 'repeat(2, 1fr)';
-  } else if (difficulty === 'medium') {
-    cardValues = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
-    gameBoard.style.gridTemplateColumns = 'repeat(4, 1fr)';
-  } else if (difficulty === 'hard') {
-    cardValues = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H','I','I','J','J','K','K','L','L','M','M','N','N','O','O','P','P','Q','Q','R','R','S','S'];
-    gameBoard.style.gridTemplateColumns = 'repeat(6, 1fr)';
-  }
-
-  let shuffledCards;
-  if (sessionStorage.getItem('flippedCards')) {
-    shuffledCards = cardValues;
+  if (sessionStorage.getItem('cardOrder')) {
+    cardValues = JSON.parse(sessionStorage.getItem('cardOrder'));
   } else {
-    shuffledCards = shuffle(cardValues);
+    if (difficulty === 'easy') {
+      cardValues = ['A', 'A', 'B', 'B'];
+      gameBoard.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    } else if (difficulty === 'medium') {
+      cardValues = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
+      gameBoard.style.gridTemplateColumns = 'repeat(4, 1fr)';
+    } else if (difficulty === 'hard') {
+      cardValues = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H','I','I','J','J','K','K','L','L','M','M','N','N','O','O','P','P','Q','Q','R','R','S','S'];
+      gameBoard.style.gridTemplateColumns = 'repeat(6, 1fr)';
+    }
+
+    cardValues = shuffle(cardValues);
+    sessionStorage.setItem('cardOrder', JSON.stringify(cardValues));
   }
 
-  shuffledCards.forEach(value => {
+  cardValues.forEach(value => {
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.value = value;
@@ -108,6 +107,7 @@ function flipCard() {
   let totalMoves = parseInt(localStorage.getItem('totalMoves')) || 0;
   totalMoves++;
   localStorage.setItem('totalMoves', totalMoves);
+  updateTotalMovesDisplay();
 
   checkForMatch();
 }
